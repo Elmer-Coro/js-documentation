@@ -12,19 +12,20 @@
 
 <body>
   <nav id="navbar">
-    <header>JS Documentation</header>
+    <header>Misterios del JS</header>
     <ul>
-      <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+      <li><a class="nav-link" href="#Introduction">Introducción</a></li>
       <li>
-        <a class="nav-link" href="#What_you_should_already_know">What you should already know</a>
+        <a class="nav-link" href="#enigmatico-nan">El Enigmático NaN</a>
       </li>
       <li>
-        <a class="nav-link" href="#JavaScript_and_Java">JavaScript and Java</a>
+        <a class="nav-link" href="#extraña-magia-doble-igual">La Extraña Magia de '=='</a>
       </li>
-      <li><a class="nav-link" href="#Hello_world">Hello world</a></li>
-      <li><a class="nav-link" href="#Variables">Variables</a></li>
+      <li><a class="nav-link" href="#misterioso-undefined">El Misterioso Valor "undefined"</a></li>
+      <li><a class="nav-link" href="#inesperado-comportamiento-arrays">El Inesperado Comportamiento de los Arrays</a>
+      </li>
       <li>
-        <a class="nav-link" href="#Declaring_variables">Declaring variables</a>
+        <a class="nav-link" href="#paradójico-valor-null">El Paradójico Valor "null"</a>
       </li>
       <li><a class="nav-link" href="#Variable_scope">Variable scope</a></li>
       <li>
@@ -39,149 +40,292 @@
       <li>
         <a class="nav-link" href="#Function_declarations">Function declarations</a>
       </li>
-      <li><a class="nav-link" href="#Reference">Reference</a></li>
+      <li><a class="nav-link" href="#Reference">Referencia</a></li>
     </ul>
   </nav>
   <main id="main-doc">
     <section class="main-section" id="Introduction">
-      <header>Introduction</header>
+      <header>Introducción</header>
       <article>
         <p>
-          JavaScript is a cross-platform, object-oriented scripting language.
-          It is a small and lightweight language. Inside a host environment
-          (for example, a web browser), JavaScript can be connected to the
-          objects of its environment to provide programmatic control over
-          them.
+          JavaScript es un lenguaje de programación que, desde su creación en 1995, ha transformado la web, permitiendo
+          la creación de aplicaciones dinámicas e interactivas. Sin embargo, más allá de su uso cotidiano en el
+          desarrollo web, JavaScript esconde una gran cantidad de curiosidades, bugs sorprendentes y comportamientos
+          inusuales que pocos conocen.
         </p>
 
         <p>
-          JavaScript contains a standard library of objects, such as Array,
-          Date, and Math, and a core set of language elements such as
-          operators, control structures, and statements. Core JavaScript can
-          be extended for a variety of purposes by supplementing it with
-          additional objects; for example:
+          En Misterios del JS, nos adentramos en los aspectos más intrigantes y menos conocidos de JavaScript. Aquí,
+          descubrirás:
         </p>
         <ul>
           <li>
-            Client-side JavaScript extends the core language by supplying
-            objects to control a browser and its Document Object Model (DOM).
-            For example, client-side extensions allow an application to place
-            elements on an HTML form and respond to user events such as mouse
-            clicks, form input, and page navigation.
+            <strong>Curiosidades Fascinantes:</strong> Pequeños detalles y hechos sorprendentes sobre JavaScript que te
+            harán ver el
+            lenguaje bajo una nueva luz.
           </li>
           <li>
-            Server-side JavaScript extends the core language by supplying
-            objects relevant to running JavaScript on a server. For example,
-            server-side extensions allow an application to communicate with a
-            database, provide continuity of information from one invocation to
-            another of the application, or perform file manipulations on a
-            server.
+            <strong>Bugs Sorprendentes:</strong> Errores históricos y comportamientos inesperados que han dejado a
+            muchos programadores
+            rascándose la cabeza.
+          </li>
+          <li>
+            <strong>Comportamientos Extraños:</strong> Situaciones inusuales y peculiaridades del lenguaje que desafían
+            la lógica
+            convencional.
+          </li>
+          <li>
+            <strong>Trucos y Hacks Ingeniosos:</strong> Métodos poco convencionales y soluciones creativas para
+            problemas comunes.
           </li>
         </ul>
       </article>
     </section>
-    <section class="main-section" id="What_you_should_already_know">
-      <header>What you should already know</header>
+    <section class="main-section" id="enigmatico-nan">
+      <header>El Enigmático NaN</header>
       <article>
-        <p>This guide assumes you have the following basic background:</p>
+        <p>
+          <code>NaN</code>, que significa "Not-a-Number", es un valor especial en JavaScript que representa un valor que
+          no es un número. A pesar de su nombre, el tipo de <code>NaN</code> es <code>"number"</code>. Esto puede
+          resultar confuso para los desarrolladores. Aquí veremos algunos comportamientos interesantes de
+          <code>NaN</code>.
+        </p>
 
+        <h3>NaN no es igual a sí mismo</h3>
+        <p>
+          Una de las peculiaridades más sorprendentes de <code>NaN</code> es que no es igual a sí mismo. Esto significa
+          que la comparación <code>NaN === NaN</code> devuelve <code>false</code>.
+        </p>
+        <code>console.log(NaN === NaN); // false</code>
+
+        <h3>Comprobando NaN</h3>
+        <p>
+          Dado que <code>NaN</code> no es igual a sí mismo, podemos utilizar esta característica para comprobar si un
+          valor es <code>NaN</code>.
+        </p>
+        <code>
+          function esNaN(valor) {<br>
+          &nbsp;&nbsp;return valor !== valor;<br>
+          }<br>
+          console.log(esNaN(NaN)); // true<br>
+          console.log(esNaN(5)); // false
+      </code>
+
+        <h3>isNaN y Number.isNaN</h3>
+        <p>
+          JavaScript proporciona la función <code>isNaN()</code> para comprobar si un valor es <code>NaN</code>, pero
+          tiene algunos comportamientos inesperados:
+        </p>
+        <code>
+          console.log(isNaN(NaN)); // true<br>
+          console.log(isNaN('hola')); // true (sorprendentemente)
+      </code>
+        <p>
+          Para evitar estos problemas, se introdujo <code>Number.isNaN()</code> en ECMAScript 2015, que proporciona una
+          forma más fiable de comprobar si un valor es <code>NaN</code>:
+        </p>
+        <code>
+          console.log(Number.isNaN(NaN)); // true<br>
+          console.log(Number.isNaN('hola')); // false
+      </code>
+      </article>
+    </section>
+    <section class="main-section" id="extraña-magia-doble-igual">
+      <header>La Extraña Magia de '=='</header>
+      <article>
+        <p>
+          El operador de igualdad flexible <code>==</code> en JavaScript realiza conversiones de tipo implícitas cuando
+          compara dos valores, lo que puede llevar a resultados sorprendentes y, a veces, confusos. A continuación,
+          exploraremos algunos de estos comportamientos inusuales.
+        </p>
+
+        <h3>Conversión Implícita de Tipos</h3>
+        <p>
+          Cuando utilizas <code>==</code>, JavaScript intenta convertir los operandos a un tipo común antes de
+          compararlos. Esto puede producir resultados inesperados:
+        </p>
+        <code>
+          console.log(0 == ''); // true<br>
+          console.log(0 == '0'); // true<br>
+          console.log(false == 'false'); // false<br>
+          console.log(false == '0'); // true
+      </code>
+
+        <h3>Casos Sorprendentes</h3>
+        <p>
+          Hay casos donde el comportamiento de <code>==</code> es especialmente sorprendente. Por ejemplo:
+        </p>
+        <code>
+          console.log([] == ![]); // true<br>
+          console.log(null == undefined); // true<br>
+          console.log([] == 0); // true<br>
+          console.log('' == 0); // true
+      </code>
+
+        <h3>La Solución: '==='</h3>
+        <p>
+          Para evitar los problemas y confusiones que puede causar <code>==</code>, se recomienda usar el operador de
+          igualdad estricta <code>===</code>, que no realiza conversiones de tipo:
+        </p>
+        <code>
+          console.log(0 === ''); // false<br>
+          console.log(0 === '0'); // false<br>
+          console.log(false === 'false'); // false<br>
+          console.log(false === '0'); // false
+      </code>
+      </article>
+    </section>
+    <section class="main-section" id="misterioso-undefined">
+      <header>El Misterioso Valor "undefined"</header>
+      <article>
+        <p>
+          En JavaScript, <code>undefined</code> es un valor que indica que una variable ha sido declarada pero no se le
+          ha asignado un valor. Es uno de los tipos de datos fundamentales y tiene algunas características y
+          comportamientos únicos.
+        </p>
+
+        <h3>Declaración sin Asignación</h3>
+        <p>
+          Cuando declaras una variable sin asignarle un valor, su valor es automáticamente <code>undefined</code>:
+        </p>
+        <code>
+          let x;<br>
+          console.log(x); // undefined
+      </code>
+
+        <h3>Propiedades No Definidas</h3>
+        <p>
+          Intentar acceder a una propiedad que no existe en un objeto devuelve <code>undefined</code> en lugar de lanzar
+          un error:
+        </p>
+        <code>
+          let obj = {};<br>
+          console.log(obj.prop); // undefined
+      </code>
+
+        <h3>Comparaciones con undefined</h3>
+        <p>
+          Es importante entender cómo se comporta <code>undefined</code> en comparaciones. Por ejemplo,
+          <code>undefined == null</code> devuelve <code>true</code>, pero <code>undefined === null</code> devuelve
+          <code>false</code>:
+        </p>
+        <code>
+          console.log(undefined == null); // true<br>
+          console.log(undefined === null); // false
+      </code>
+
+        <h3>undefined vs. no definido</h3>
+        <p>
+          Es diferente tener una variable con el valor <code>undefined</code> a intentar acceder a una variable que no
+          ha sido declarada:
+        </p>
+        <code>
+          let y;<br>
+          console.log(y); // undefined<br>
+          console.log(z); // ReferenceError: z is not defined
+      </code>
+
+        <h3>Asignación de undefined</h3>
+        <p>
+          Aunque no es común, puedes asignar <code>undefined</code> explícitamente a una variable:
+        </p>
+        <code>
+          let a = undefined;<br>
+          console.log(a); // undefined
+      </code>
+      </article>
+    </section>
+    <section class="main-section" id="inesperado-comportamiento-arrays">
+      <header>El Inesperado Comportamiento de los Arrays</header>
+      <article>
+        <p>
+          Los arrays en JavaScript pueden tener comportamientos inesperados debido a su naturaleza flexible. Por
+          ejemplo, agregar elementos más allá del límite actual del array automáticamente ajusta su longitud, pero no
+          crea elementos intermedios.
+        </p>
+
+        <h3>Longitud Automáticamente Ajustada</h3>
+        <p>
+          Cuando agregas un elemento en un índice más allá del límite actual del array, la longitud del array se ajusta
+          automáticamente. Sin embargo, los elementos intermedios no son creados y su valor es <code>undefined</code>:
+        </p>
+        <code>
+          let arr = [];<br>
+          arr[100] = 'JS';<br>
+          console.log(arr.length); // 101<br>
+          console.log(arr[0]); // undefined<br>
+          console.log(arr[99]); // undefined
+      </code>
+
+        <h3>Uso de fill() para Inicializar Elementos</h3>
+        <p>
+          Si deseas inicializar elementos intermedios con un valor específico, puedes usar el método
+          <code>fill()</code>:
+        </p>
+        <code>
+          let arr2 = new Array(101).fill(0);<br>
+          arr2[100] = 'JS';<br>
+          console.log(arr2.length); // 101<br>
+          console.log(arr2[0]); // 0<br>
+          console.log(arr2[99]); // 0
+      </code>
+      </article>
+    </section>
+    <section class="main-section" id="paradójico-valor-null">
+      <header>El Paradójico Valor "null"</header>
+      <article>
+        <p>
+          En JavaScript, <code>null</code> es un valor especial que indica la ausencia intencional de cualquier valor o
+          referencia a un objeto. Aunque puede parecer similar a <code>undefined</code>, tiene algunas características y
+          comportamientos únicos.
+        </p>
+
+        <h3>Asignación de null</h3>
+        <p>
+          Puedes asignar explícitamente <code>null</code> a una variable para indicar que no contiene ningún valor:
+        </p>
+        <code>
+          let x = null;<br>
+          console.log(x); // null
+      </code>
+
+        <h3>Diferencias entre null y undefined</h3>
+        <p>
+          Aunque a menudo se usan indistintamente, <code>null</code> y <code>undefined</code> tienen diferencias
+          importantes:
+        </p>
         <ul>
-          <li>
-            A general understanding of the Internet and the World Wide Web
-            (WWW).
+          <li><strong>null</strong> se utiliza para indicar la ausencia intencional de valor, mientras que
+            <strong>undefined</strong> indica que una variable no ha sido inicializada o no tiene un valor asignado.
           </li>
-          <li>Good working knowledge of HyperText Markup Language (HTML).</li>
-          <li>
-            Some programming experience. If you are new to programming, try
-            one of the tutorials linked on the main page about JavaScript.
-          </li>
+          <li><strong>null</strong> es un valor primitivo, mientras que <strong>undefined</strong> es un tipo de dato
+            especial que representa la ausencia de un valor.</li>
         </ul>
-      </article>
-    </section>
-    <section class="main-section" id="JavaScript_and_Java">
-      <header>JavaScript and Java</header>
-      <article>
-        <p>
-          JavaScript and Java are similar in some ways but fundamentally
-          different in some others. The JavaScript language resembles Java but
-          does not have Java's static typing and strong type checking.
-          JavaScript follows most Java expression syntax, naming conventions
-          and basic control-flow constructs which was the reason why it was
-          renamed from LiveScript to JavaScript.
-        </p>
 
+        <h3>Comprobando null</h3>
         <p>
-          In contrast to Java's compile-time system of classes built by
-          declarations, JavaScript supports a runtime system based on a small
-          number of data types representing numeric, Boolean, and string
-          values. JavaScript has a prototype-based object model instead of the
-          more common class-based object model. The prototype-based model
-          provides dynamic inheritance; that is, what is inherited can vary
-          for individual objects. JavaScript also supports functions without
-          any special declarative requirements. Functions can be properties of
-          objects, executing as loosely typed methods.
+          Puedes verificar si una variable contiene <code>null</code> utilizando el operador de igualdad estricta
+          <code>===</code>:
         </p>
-        <p>
-          JavaScript is a very free-form language compared to Java. You do not
-          have to declare all variables, classes, and methods. You do not have
-          to be concerned with whether methods are public, private, or
-          protected, and you do not have to implement interfaces. Variables,
-          parameters, and function return types are not explicitly typed.
-        </p>
-      </article>
-    </section>
-    <section class="main-section" id="Hello_world">
-      <header>Hello world</header>
-      <article>
-        To get started with writing JavaScript, open the Scratchpad and write
-        your first "Hello world" JavaScript code:
-        <code>function greetMe(yourName) { alert("Hello " + yourName); }
-            greetMe("World");
-          </code>
+        <code>
+          let y = null;<br>
+          console.log(y === null); // true
+      </code>
 
-        Select the code in the pad and hit Ctrl+R to watch it unfold in your
-        browser!
-      </article>
-    </section>
-    <section class="main-section" id="Variables">
-      <header>Variables</header>
-      <p>
-        You use variables as symbolic names for values in your application.
-        The names of variables, called identifiers, conform to certain rules.
-      </p>
-      <p>
-        A JavaScript identifier must start with a letter, underscore (_), or
-        dollar sign ($); subsequent characters can also be digits (0-9).
-        Because JavaScript is case sensitive, letters include the characters
-        "A" through "Z" (uppercase) and the characters "a" through "z"
-        (lowercase).
-      </p>
-      <p>
-        You can use ISO 8859-1 or Unicode letters such as å and ü in
-        identifiers. You can also use the Unicode escape sequences as
-        characters in identifiers. Some examples of legal names are
-        Number_hits, temp99, and _name.
-      </p>
-    </section>
-    <section class="main-section" id="Declaring_variables">
-      <header>Declaring variables</header>
-      <article>
-        You can declare a variable in three ways:
+        <h3>Evitar Errores al Acceder a Propiedades</h3>
         <p>
-          With the keyword var. For example, <code>var x = 42.</code> This
-          syntax can be used to declare both local and global variables.
+          Al acceder a propiedades de un objeto, es importante verificar si la propiedad existe y si su valor es
+          <code>null</code> para evitar errores:
         </p>
-        <p>
-          By simply assigning it a value. For example,
-          <code>x = 42.</code> This always declares a global variable. It
-          generates a strict JavaScript warning. You shouldn't use this
-          variant.
-        </p>
-        <p>
-          With the keyword let. For example,<code> let y = 13.</code> This
-          syntax can be used to declare a block scope local variable. See
-          Variable scope below.
-        </p>
+        <code>
+          let obj = { prop: null };<br>
+          console.log(obj.prop); // null<br>
+          if (obj.prop === null) {<br>
+          &nbsp;&nbsp;console.log("La propiedad está definida como null");<br>
+          } else {<br>
+          &nbsp;&nbsp;console.log("La propiedad no está definida como null");<br>
+          }
+      </code>
       </article>
     </section>
     <section class="main-section" id="Variable_scope">
@@ -427,12 +571,12 @@
       </article>
     </section>
     <section class="main-section" id="Reference">
-      <header>Reference</header>
+      <header>Referencia</header>
       <article>
         <ul>
           <li>
-            All the documentation in this page is taken from
-            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide" target="_blank">MDN</a>
+            Toda la documentación en esta página está basada de
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide" target="_blank">MDN.</a>
           </li>
         </ul>
       </article>
